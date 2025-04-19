@@ -1,0 +1,9 @@
+pandas
+matplotlib
+torch
+Pillow
+transformers
+datasets
+timm
+accelerate==1.6.0
+wandb
