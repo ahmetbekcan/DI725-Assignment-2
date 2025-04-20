@@ -9,3 +9,4 @@ accelerate==1.6.0
 wandb
 torchmetrics
 scipy
+pycocotools

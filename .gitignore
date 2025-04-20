@@ -13,3 +13,4 @@ venv/
 *.env
 wandb/
 data/
+output_dir/
