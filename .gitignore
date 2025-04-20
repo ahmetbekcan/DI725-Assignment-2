@@ -14,3 +14,4 @@ venv/
 wandb/
 data/
 output_dir/
+output/

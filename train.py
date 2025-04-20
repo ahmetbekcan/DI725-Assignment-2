@@ -180,30 +180,32 @@ model = AutoModelForObjectDetection.from_pretrained(
 )
 
 
-output_dir = "output/detr-finetuned-auair"
+output_dir = "output/detr-finetuned-auair-small-lr"
 training_args = TrainingArguments(
-    output_dir="output_dir",
+    output_dir=output_dir,
     num_train_epochs=1,
+    max_steps=5000,
     fp16=True,
-    per_device_train_batch_size=32,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
     dataloader_num_workers=0,
-    learning_rate=5e-5,
+    learning_rate=1e-5,
     lr_scheduler_type="cosine",
     weight_decay=1e-4,
     max_grad_norm=0.01,
     metric_for_best_model="eval_map",
     greater_is_better=True,
     load_best_model_at_end=True,
-    eval_strategy="epoch",
-    save_strategy="epoch",
-    eval_steps=0.1,
-    save_steps=0.5,
+    eval_strategy="steps",
+    save_steps=1000,
+    eval_steps=1000,
     save_total_limit=2,
+    warmup_steps=200,
     remove_unused_columns=False,
     eval_do_concat_batches=False,
     push_to_hub=True,
-    push_to_hub_model_id="detr-resnet-50-finetuned-auair",
-    run_name="detr-resnet-50-auair-finetuned"
+    push_to_hub_model_id="detr-resnet-50-finetuned-auair-small-lr",
+    run_name="final-detr-resnet-50-auair-finetuned-small-lr"
 )
 
 
@@ -211,7 +213,7 @@ wandb.login(key=os.getenv("WANDB_API"))
 
 wandb.init(
     project="Assignment-2",
-    name="detr-resnet-50-auair-finetuned",
+    name="final-detr-resnet-50-auair-finetuned-small-lr",
     config=training_args
 )
 
